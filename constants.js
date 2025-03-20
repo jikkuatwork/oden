@@ -1,6 +1,9 @@
 import { join } from "https://deno.land/std/path/mod.ts";
 import { getHomeDir } from "./utils.js";
 
+// Version number to track changes
+export const VERSION = "0.2.0";
+
 // Default port for the web server
 export const DEFAULT_PORT = 7423;
 

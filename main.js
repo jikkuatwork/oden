@@ -2,11 +2,11 @@
 
 import { startServer } from "./server.js";
 import { startDaemon, checkStatus, stopDaemon } from "./daemon.js";
-import { DEFAULT_PORT } from "./constants.js";
+import { DEFAULT_PORT, VERSION } from "./constants.js";
 
 async function printHelp() {
   console.log(`
-oden - A simple Deno CLI for serving web content
+oden v${VERSION} - A simple Deno CLI for serving web content
 
 USAGE:
   oden [COMMAND]

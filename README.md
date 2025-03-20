@@ -23,7 +23,7 @@ git clone https://github.com/yourusername/oden.git
 cd oden
 
 # Compile to a standalone binary
-deno compile --allow-net --allow-read --allow-write --allow-run --allow-env -o oden main.js
+deno compile --allow-net --allow-read --allow-write --allow-run --allow-env -o executable/oden main.js
 ```
 
 This will create an executable named `oden` (or `oden.exe` on Windows) in your current directory.
