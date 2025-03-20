@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="A minimalist dashboard displaying elegant data visualizations">
+  <meta name="theme-color" content="#425f98">
+  
+  <!-- Social Preview Meta Tags -->
+  <meta property="og:title" content="Minimal Dashboard">
+  <meta property="og:description" content="A minimalist dashboard displaying elegant data visualizations">
+  <meta property="og:image" content="https://play.toolbomber.com/api/pwa-images/?fg=ff7852&bg=425f98&type=social">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://play.toolbomber.com/api/pwa-images/?fg=ff7852&bg=425f98&type=social">
+  
+  <title>Minimal Dashboard</title>
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="https://play.toolbomber.com/api/pwa-images/?fg=ff7852&bg=425f98&type=logo">
+  <link rel="apple-touch-icon" href="https://play.toolbomber.com/api/pwa-images/?fg=ff7852&bg=425f98&type=logo">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="#" id="manifestPlaceholder">
+  <script>
+    // Generate manifest dynamically
+    const manifestData = {
+      "name": "Minimal Dashboard",
+      "short_name": "Dashboard",
+      "description": "A minimalist dashboard displaying elegant data visualizations",
+      "start_url": "/",
+      "display": "standalone",
+      "background_color": "#425f98",
+      "theme_color": "#425f98",
+      "icons": [{
+        "src": "https://play.toolbomber.com/api/pwa-images/?fg=ff7852&bg=425f98&type=logo",
+        "sizes": "192x192",
+        "type": "image/png"
+      }]
+    };
+    
+    const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+    const manifestURL = URL.createObjectURL(blob);
+    document.getElementById('manifestPlaceholder').setAttribute('href', manifestURL);
+  </script>
+  
+  <!-- Inter Font -->
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter var', 'sans-serif'],
+          },
+          colors: {
+            primary: '#425f98',
+            accent: '#ff7852',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .scroll-container {
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    @media all and (display-mode: standalone) {
+      .ios-standalone-fix {
+        padding-top: env(safe-area-inset-top);
+      }
+    }
+    
+    body {
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(66, 95, 152, 0.3);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(66, 95, 152, 0.5);
+    }
+    
+    /* Card hover effect */
+    .dashboard-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .dashboard-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(66, 95, 152, 0.1), 0 8px 10px -6px rgba(66, 95, 152, 0.1);
+    }
+    
+    /* Progress bar animation */
+    @keyframes progress {
+      0% { width: 0; }
+      100% { width: var(--progress-width); }
+    }
+    
+    .progress-bar-fill {
+      animation: progress 1s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+  <div class="ios-standalone-fix"></div>
+  
+  <!-- Header -->
+  <header class="px-6 py-6 lg:px-8">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-semibold text-primary">Dashboard</h1>
+        <p class="text-sm text-gray-500">Last updated: March 20, 2025</p>
+      </div>
+      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="px-6 py-4 lg:px-8 scroll-container">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <!-- Revenue Card -->
+      <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-sm font-medium text-gray-500">Revenue</h3>
+            <p class="text-2xl font-semibold mt-1">$24,392</p>
+          </div>
+          <div class="flex items-center justify-center h-8 w-8 rounded-lg bg-primary/10 text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center text-xs">
+          <span class="flex items-center text-green-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+            </svg>
+            12.7%
+          </span>
+          <span class="ml-2 text-gray-500">vs last month</span>
+        </div>
+      </div>
+      
+      <!-- Users Card -->
+      <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-sm font-medium text-gray-500">Active Users</h3>
+            <p class="text-2xl font-semibold mt-1">8,472</p>
+          </div>
+          <div class="flex items-center justify-center h-8 w-8 rounded-lg bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center text-xs">
+          <span class="flex items-center text-green-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+            </svg>
+            8.2%
+          </span>
+          <span class="ml-2 text-gray-500">vs last month</span>
+        </div>
+      </div>
+      
+      <!-- Engagement Card -->
+      <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-sm font-medium text-gray-500">Avg. Session</h3>
+            <p class="text-2xl font-semibold mt-1">4m 38s</p>
+          </div>
+          <div class="flex items-center justify-center h-8 w-8 rounded-lg bg-primary/10 text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center text-xs">
+          <span class="flex items-center text-red-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+            3.1%
+          </span>
+          <span class="ml-2 text-gray-500">vs last month</span>
+        </div>
+      </div>
+      
+      <!-- Conversion Card -->
+      <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-sm font-medium text-gray-500">Conversion Rate</h3>
+            <p class="text-2xl font-semibold mt-1">3.42%</p>
+          </div>
+          <div class="flex items-center justify-center h-8 w-8 rounded-lg bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center text-xs">
+          <span class="flex items-center text-green-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+            </svg>
+            0.8%
+          </span>
+          <span class="ml-2 text-gray-500">vs last month</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Charts Section -->
+    <div class="mt-8">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">Goal Progress</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Monthly Revenue Progress -->
+        <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div class="flex justify-between mb-2">
+            <h3 class="text-sm font-medium text-gray-800">Monthly Revenue</h3>
+            <span class="text-sm font-medium text-primary">78%</span>
+          </div>
+          <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+            <div class="progress-bar-fill h-full bg-primary rounded-full" style="--progress-width: 78%"></div>
+          </div>
+          <div class="flex justify-between mt-2 text-xs text-gray-500">
+            <span>$24,392</span>
+            <span>Target: $30,000</span>
+          </div>
+        </div>
+        
+        <!-- New Users Progress -->
+        <div class="dashboard-card bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div class="flex justify-between mb-2">
+            <h3 class="text-sm font-medium text-gray-800">New Users</h3>
+            <span class="text-sm font-medium text-accent">65%</span>
+          </div>
+          <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+            <div class="progress-bar-fill h-full bg-accent rounded-full" style="--progress-width: 65%"></div>
+          </div>
+          <div class="flex justify-between mt-2 text-xs text-gray-500">
+            <span>1,298</span>
+            <span>Target: 2,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    $(document).ready(function() {
+      // Keyboard shortcuts
+      $(document).on('keydown', function(e) {
+        if (e.key === 'Escape') {
+          // Implement escape key functionality if needed
+        }
+      });
+      
+      // Add subtle hover effects to cards
+      $('.dashboard-card').hover(
+        function() {
+          $(this).addClass('hover');
+        },
+        function() {
+          $(this).removeClass('hover');
+        }
+      );
+    });
+  </script>
+</body>
+</html>
